@@ -7,7 +7,7 @@ def respond():
     name = request.args.get("name", None)
 
     # For debugging
-    print(f"got name {name}")
+    print(f"Got this nice name {name} !!!!!")
 
     response = {}
 
