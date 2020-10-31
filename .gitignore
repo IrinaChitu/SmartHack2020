@@ -2,6 +2,7 @@
 /node_modules
 /.pnp
 .pnp.js
+shoparound-api/venv/
 
 # testing
 /coverage
