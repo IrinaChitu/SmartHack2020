@@ -37,7 +37,6 @@ function drop(ev) {
 }
 
 function addShelf(ev) {
-  //   alert(ev.target.id);
   ev.target.src = '../../public/images/shelf.png';
   document.getElementById('productList').style.visibility = 'visible';
 }
