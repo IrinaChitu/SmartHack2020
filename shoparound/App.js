@@ -1,21 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import MenuScreen from './src/screens/MainMenu.js';
+import ShopsListScreen from './src/screens/ShopsMenu.js';
+import StoreLocationScreen from './src/screens/StoreLocation.js';
+import CreateShoppingListScreen from './src/screens/ShoppingList.js';
+import FindProductScreen from './src/screens/FindElement.js';
+import ShoppingListScreen from './src/screens/FinalShoppingList.js';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='MainMenu'>
+        <Stack.Screen name='ShopAround' component={MenuScreen} />
+        <Stack.Screen name='Shops List' component={ShopsListScreen} />
+        <Stack.Screen name='Shops Location' component={StoreLocationScreen} />
+        <Stack.Screen
+          name='Create Shopping List'
+          component={CreateShoppingListScreen}
+        />
+        <Stack.Screen name='Find Product' component={FindProductScreen} />
+        <Stack.Screen name='Shopping List' component={ShoppingListScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

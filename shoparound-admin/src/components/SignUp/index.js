@@ -48,9 +48,10 @@ class SignUpFormBase extends React.Component {
         email,
         passwordOne
       );
-      
-      this.props.history.push(ROUTES.MY_ITEMS);
-      window.location.href = ROUTES.MY_ITEMS;
+
+      setTimeout(() => {
+        window.location.href = ROUTES.MY_ITEMS;
+      }, 1500);
     } catch (error) {
       this.setState({ error });
     }

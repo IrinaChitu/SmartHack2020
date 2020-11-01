@@ -10,6 +10,7 @@ import MyItems from '../Items/MyItems';
 import Account from '../Account';
 import NewItemPage from '../Items/NewItem';
 
+import ShopMap from '../ShopMap';
 import EditItem from '../Items/EditItem';
 
 import * as ROUTES from '../../constants/routes';
@@ -28,6 +29,8 @@ const App = () => (
       <Route path={ROUTES.PASSWORD_CHANGE} component={PasswordChange} />
       <Route path={ROUTES.SIGN_UP} component={SignUp} />
       <Route path={ROUTES.CHECK_EMAIL} component={CheckEmailPage} />
+
+      <Route path={ROUTES.SHOP_MAP} component={ShopMap}/>
 
       <Route path={ROUTES.NEW_ITEM} component={NewItemPage} />
       <Route path={ROUTES.EDIT_ITEM} component={EditItem} />
