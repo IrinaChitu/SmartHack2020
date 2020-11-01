@@ -1,5 +1,5 @@
 import io
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, make_response
 from lib import matrix_utils, image_utils
 
 app = Flask(__name__)
@@ -23,7 +23,10 @@ def respond():
     file_object = io.BytesIO()
     image.save(file_object, 'PNG')
     file_object.seek(0)
-    return send_file(file_object, mimetype='image/PNG')
+    
+    response = make_response(send_file(file_object, mimetype='image/png'))
+    response.headers['Content-Transfer-Encoding'] = 'base64'
+    return response
 
     # response = {}
     # response["total_cost"] = total_cost
