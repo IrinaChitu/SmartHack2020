@@ -8,6 +8,7 @@ import StoreLocationScreen from './src/screens/StoreLocation.js';
 import CreateShoppingListScreen from './src/screens/ShoppingList.js';
 import FindProductScreen from './src/screens/FindElement.js';
 import ShoppingListScreen from './src/screens/FinalShoppingList.js';
+import FastestRouteScreen from './src/screens/FastestRoute.js';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ export default function App() {
         />
         <Stack.Screen name='Find Product' component={FindProductScreen} />
         <Stack.Screen name='Shopping List' component={ShoppingListScreen} />
+        <Stack.Screen name='Fastest Route' component={FastestRouteScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

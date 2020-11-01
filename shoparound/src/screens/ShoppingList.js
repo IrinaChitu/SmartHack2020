@@ -94,7 +94,7 @@ function getProductsInStock() {
   var products = ['lemon', 'apple', 'nuts', 'lime', 'fifa', 'firogaf'];
   products.sort();
 
-  console.log(products);
+  // console.log(products);
 
   var i = 1;
   var lastChar = products[0][0];
@@ -111,13 +111,13 @@ function getProductsInStock() {
     i++;
   }
   allProducts.push(section);
-  console.log(allProducts);
+  // console.log(allProducts);
+  return allProducts;
 }
 
 function CreateShoppingListScreen({ route, navigation }) {
   var { shoppingList } = route.params;
   const [search, setSearch] = useState('');
-  var productsInStock = getProductsInStock();
 
   return (
     <View>
@@ -134,18 +134,18 @@ function CreateShoppingListScreen({ route, navigation }) {
           navigation.navigate('Find Product', { search, shoppingList });
         }}
       />
-      <Button
+      {/* <Button
         title='Show Search'
         onPress={() => {
           console.log(search);
         }}
-      />
-      <Button
+      /> */}
+      {/* <Button
         title='Show Shopping List'
         onPress={() => {
           console.log(shoppingList);
         }}
-      />
+      /> */}
       <Button
         title='Finish shopping list'
         onPress={() => {
@@ -153,7 +153,7 @@ function CreateShoppingListScreen({ route, navigation }) {
         }}
       />
       <SectionList
-        sections={dataList}
+        sections={getProductsInStock()}
         renderItem={({ item }, idx) => (
           <ShoppingItem key={idx} item={item} shoppingList={shoppingList} />
         )}
@@ -167,11 +167,3 @@ function CreateShoppingListScreen({ route, navigation }) {
 }
 
 export default CreateShoppingListScreen;
-
-var dataList = [
-  { title: 'D', data: ['Devin', 'Dan', 'Dominic'] },
-  {
-    title: 'J',
-    data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie'],
-  },
-];
