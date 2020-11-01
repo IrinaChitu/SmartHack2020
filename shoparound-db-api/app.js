@@ -58,7 +58,7 @@ app.get('/items', async function(req, res) {
   snapshot.forEach((item) => {
     const id = item.id;
     const { name } = item.data();
-    items.push({ id, name, description, category });
+    items.push({ id, name });
   });
 
   res.send({items: items});
@@ -78,7 +78,7 @@ app.get('/shelves', async function(req, res) {
     const coords = item.id.split('|');
     const x = coords[0];
     const y = coords[1];
-    shelves.push({ id, x, y});
+    shelves.push({ id, x, y });
   });
 
   res.send({shelves: shelves});
