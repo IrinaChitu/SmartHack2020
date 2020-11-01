@@ -13,21 +13,21 @@ import firebase from '../config.js';
 
 // let itemsRef = db.ref('/items');
 
-function getAllProducts() {
-  // db.ref('/users').on('value', (querySnapShot) => {
-  //   let data = querySnapShot.val() ? querySnapShot.val() : {};
-  //   console.log(...data);
-  // });
-  // const ref = await firestore().collection('users');
-  // var db = firebase.firestore.collection('users');
-  // db.onSnapshot(getCollection);
-}
+// function getAllProducts() {
+// db.ref('/users').on('value', (querySnapShot) => {
+//   let data = querySnapShot.val() ? querySnapShot.val() : {};
+//   console.log(...data);
+// });
+// const ref = await firestore().collection('users');
+// var db = firebase.firestore.collection('users');
+// db.onSnapshot(getCollection);
+// }
 
-function getCollection(querySnapShot) {
-  querySnapShot.forEach((result) => {
-    console.log(result.data);
-  });
-}
+// function getCollection(querySnapShot) {
+//   querySnapShot.forEach((result) => {
+//     console.log(result.data);
+//   });
+// }
 
 const styles = StyleSheet.create({
   container: {
@@ -91,15 +91,26 @@ class ShoppingItem extends Component {
 }
 
 function getProductsInStock() {
-  // var products = ['lemon', 'apple', 'nuts'];
-  // products.sort();
-  // for (var i = 0; i < products.length; i++) {
-  //   // console.log(product);
-  //   var section = { title: products[i], data: [products[i]] };
-  //   section.data.push(products[i]);
-  // }
+  var products = ['lemon', 'apple', 'nuts', 'lime', 'fifa', 'firogaf'];
+  products.sort();
 
-  var allProducts = getAllProducts();
+  console.log(products);
+
+  var i = 1;
+  var lastChar = products[0][0];
+  var allProducts = [];
+  var section = { title: products[0][0], data: [products[0]] };
+  while (i < products.length) {
+    if (products[i][0] === lastChar) {
+      section.data.push(products[i]);
+    } else {
+      lastChar = products[i][0];
+      allProducts.push(section);
+      section = { title: products[i][0], data: [products[i]] };
+    }
+    i++;
+  }
+  allProducts.push(section);
   console.log(allProducts);
 }
 
