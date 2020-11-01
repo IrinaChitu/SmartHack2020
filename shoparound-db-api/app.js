@@ -75,8 +75,8 @@ app.get('/shelves', async function(req, res) {
   const snapshot = await shelvesRef.get();
 
   snapshot.forEach((item) => {
-    const { x, y } = item.data();
-    shelves.push({ id, x, y });
+    const { x, y } = item.data()
+    shelves.push({ x, y });
   });
 
   res.send({shelves: shelves});
