@@ -23,27 +23,55 @@ const config = {
 firebaseApp.initializeApp(config);
 const firebaseDb = firebaseApp.firestore();
 
-app.get('/items', async function(req, res) {
-    const itemsRef = firebaseDb.collection('users')
-                    .doc(authUser)
-                    .collection('items');
+function getShops() {
+  firebaseDb.collection('users').get()
+    .then((snapshot) => {
+      let users = [];
 
-    console.log(itemsRef);
-    itemsRef.get().then((snapshot) => {
-      let items = [];
-
-      snapshot.forEach((item) => {
-        console.log(item.data());
-
-        const id = item.id;
-        const { name, description, category } = item.data();
-        items.push({ id, name, description, category });
+      snapshot.forEach((user) => {
+        const id = user.id;
+        const { shopName } = user.data();
+        users.push({ id, shopName });
       });
   
-      res.send({items: items});
+      return users
     }).catch((err) => {
-      res.send(err);
+      console.log(err);
+      return undefined;
     });
-});
+}
+
+app.get('/shops', (req, res) => {
+  let shops = getShops();
+
+  console.log(shops);
+
+  res.send(shops);
+})
+
+// app.get('/items', async function(req, res) {
+//     let users = getShops();
+
+//     const itemsRef = firebaseDb.collection('users')
+//                     .doc(authUser)
+//                     .collection('items');
+
+//     console.log(itemsRef);
+//     itemsRef.get().then((snapshot) => {
+//       let items = [];
+
+//       snapshot.forEach((item) => {
+//         console.log(item.data());
+
+//         const id = item.id;
+//         const { name, description, category } = item.data();
+//         items.push({ id, name, description, category });
+//       });
+  
+//       res.send({items: items});
+//     }).catch((err) => {
+//       res.send(err);
+//     });
+// });
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));
