@@ -52,8 +52,6 @@ class MyItems extends React.Component {
           style={{
             justifyContent: 'center',
             margin: '4%',
-            // marginLeft: '5%',
-            // marginRight: '5%',
           }}
         >
           {this.state.items.map(({ id, name, description, category }, idx) => {
