@@ -2,6 +2,8 @@
 /node_modules
 /.pnp
 .pnp.js
+shoparound-api/venv/
+shoparound-api/lib/__pycache__/
 
 # testing
 /coverage
