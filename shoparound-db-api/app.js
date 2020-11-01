@@ -84,6 +84,7 @@ app.get('/items', async function(req, res) {
     let foundPosition = false;
     for (let i = 0; i < 4 && !foundPosition; ++i) {
       for (let j = 0; j < 4 && !foundPosition; ++j) {
+        let isGoodPosition = true
         let nx = x + dx[i];
         let ny = y + dy[j];
 
@@ -92,11 +93,15 @@ app.get('/items', async function(req, res) {
         }
 
         for (let shelve of shelves) {
-          if (nx != x && ny != y && nx !== shelve.xx && ny !== shelve.yy) {
-            foundPosition = true;
-            items.push({id, name, x: nx, y: ny});
+          if (nx == x || ny == y || nx === shelve.xx || ny === shelve.yy) {
+            isGoodPosition = false;
             break;
           }
+        }
+
+        if (isGoodPosition) {
+          foundPosition = true;
+          items.push({id, name, x: nx, y: ny});
         }
       }
     }
