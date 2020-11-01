@@ -23,22 +23,20 @@ const config = {
 firebaseApp.initializeApp(config);
 const firebaseDb = firebaseApp.firestore();
 
-function getShops() {
-  firebaseDb.collection('users').get()
-    .then((snapshot) => {
-      let users = [];
-
-      snapshot.forEach((user) => {
-        const id = user.id;
-        const { shopName } = user.data();
-        users.push({ id, shopName });
-      });
+async function getShops() {
+  const usersRef = firebaseDb.collection('users')
   
-      return users
-    }).catch((err) => {
-      console.log(err);
-      return undefined;
-    });
+  let shops = [];
+  const snapshot = await usersRef.get();
+  snapshot.forEach((shop) => {
+    console.log(shop.data());
+
+    const id = shop.id;
+    const { shopName } = item.data();
+    shops.push({ id, shopName });
+  });
+  
+  return shops;
 }
 
 app.get('/shops', (req, res) => {
