@@ -19,7 +19,7 @@ function FastestRouteScreen({ route, navigation }) {
         imageWidth={200}
         imageHeight={200}
       >
-        {(imageUrl) => {
+        {/* {(imageUrl) => {
           var image = new Image();
           image.src = imageUrl;
           return (
@@ -28,7 +28,12 @@ function FastestRouteScreen({ route, navigation }) {
               source={{ uri: `data:image/png;base64,${image}` }}
             />
           );
-        }}
+        }} */}
+        <Image
+          style={{ width: 200, height: 200 }}
+          //   source={{ uri: `data:image/png;base64,${image}` }}
+          source={require('../demo-road.jpg')}
+        />
       </ImageZoom>
       {shoppingList.map((it) => {
         return <CheckBox title={it} checked={true} />;
