@@ -1,15 +1,20 @@
 import * as React from 'react';
 
-import { View, Button, Text } from 'react-native';
+import { View, Button } from 'react-native';
 
 function MenuScreen({ navigation }) {
   return (
     <View>
-      <Text>Aici ceva pagina de prezentare</Text>
       <Button
-        title='Start Shopping'
+        title='Start shopping'
         onPress={() => {
           navigation.navigate('Shops List');
+        }}
+      />
+      <Button
+        title='Create Shopping List'
+        onPress={() => {
+          navigation.navigate('Create Shopping List', { shoppingList: [] });
         }}
       />
     </View>

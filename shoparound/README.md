@@ -23,3 +23,7 @@ expo install react-native-gesture-handler react-native-reanimated react-native-s
 ### Installing the stack navigator library
 
 npm install @react-navigation/stack
+
+### Other dependencies
+
+npm install react-native-elements --save
