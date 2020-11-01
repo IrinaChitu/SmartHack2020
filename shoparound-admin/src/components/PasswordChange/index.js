@@ -55,10 +55,8 @@ class PasswordChangeForm extends Component {
           >
             <Card
               style={{
-                // width: '25%',
-                backgroundColor: 'rgba(223,25,22,0.4)',
+                backgroundColor: '#ADD7F6',
                 borderRadius: '25px',
-                // height: '60%',
               }}
             >
               <Card.Body
@@ -78,7 +76,7 @@ class PasswordChangeForm extends Component {
                     type='password'
                     placeholder='New Password'
                     className='form-control'
-                    style={{ backgroundColor: '#F9DCDC', textAlign: 'center' }}
+                    style={{ backgroundColor: '#87BFFF', textAlign: 'center' }}
                   />{' '}
                   <br />
                   <input
@@ -88,13 +86,11 @@ class PasswordChangeForm extends Component {
                     type='password'
                     placeholder='Confirm New Password'
                     className='form-control'
-                    style={{ backgroundColor: '#F9DCDC', textAlign: 'center' }}
+                    style={{ backgroundColor: '#87BFFF', textAlign: 'center' }}
                   />{' '}
                 </Card.Title>
               </Card.Body>
-              <Card.Footer
-                className='d-flex justify-content-around'
-              >
+              <Card.Footer className='d-flex justify-content-around'>
                 <button
                   type='button'
                   disabled={isInvalid}

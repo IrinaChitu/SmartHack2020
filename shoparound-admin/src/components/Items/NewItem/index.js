@@ -53,7 +53,7 @@ class NewItemFormBase extends React.Component {
         name: name,
         description: description,
         category: category,
-        id_shelf
+        id_shelf,
       })
       .then(() => {
         this.setState({ ...INITIAL_STATE });
@@ -71,9 +71,7 @@ class NewItemFormBase extends React.Component {
     const isInvalid = name === '' || description === '' || category === '';
 
     return (
-      <form
-        onSubmit={this.onSubmit}
-      >
+      <form onSubmit={this.onSubmit}>
         <Container fluid>
           <Row
             xs='1'
@@ -89,7 +87,7 @@ class NewItemFormBase extends React.Component {
             <Card
               // key={this.props.id}
               style={{
-                backgroundColor: 'rgba(223,25,22,0.4)',
+                backgroundColor: '#ADD7F6',
                 borderRadius: '25px',
               }}
             >
@@ -106,7 +104,7 @@ class NewItemFormBase extends React.Component {
                     type='text'
                     placeholder='Item name'
                     className='form-control'
-                    style={{ backgroundColor: '#F9DCDC', textAlign: 'center' }}
+                    style={{ backgroundColor: '#87BFFF', textAlign: 'center' }}
                   />
                   <br />
                   <input
@@ -116,7 +114,7 @@ class NewItemFormBase extends React.Component {
                     type='text'
                     placeholder='Description'
                     className='form-control'
-                    style={{ backgroundColor: '#F9DCDC', textAlign: 'center' }}
+                    style={{ backgroundColor: '#87BFFF', textAlign: 'center' }}
                   />
                   <br />
                   <input
@@ -126,7 +124,7 @@ class NewItemFormBase extends React.Component {
                     type='text'
                     placeholder='Category'
                     className='form-control'
-                    style={{ backgroundColor: '#F9DCDC', textAlign: 'center' }}
+                    style={{ backgroundColor: '#87BFFF', textAlign: 'center' }}
                   />
                 </Card.Title>
               </Card.Body>

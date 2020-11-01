@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Card } from 'react-bootstrap';
+
 import * as ROUTES from '../../../constants/routes';
 import { withFirebase } from '../../Firebase';
 
@@ -30,30 +32,58 @@ class ShowItem extends React.Component {
 
   render() {
     return (
-      <div>
-        <h3 key={this.props.idx}>Name: {this.props.name}</h3>
-        <h3 >Description: {this.props.description}</h3>
-        <h3 >Category: {this.props.category}</h3>
-        <button
-          type='button'
-          className='btn btn-outline-info'
-          style={{ width: '40%' }}
-          onClick={() => {
-            window.location.href = `${ROUTES.EDIT_ITEM}?id=${this.props.id}`;
-          }}
+      <Card
+        key={this.props.id}
+        style={{
+          marginLeft: '2.5%',
+          marginRight: '2.5%',
+          height: '97%',
+          backgroundColor: '#ADD7F6',
+          borderRadius: '25px',
+        }}
+      >
+        <Card.Body>
+          <Card.Title
+            key={this.props.idx}
+            style={{ color: 'white', textAlign: 'center' }}
+          >
+            {this.props.name}
+          </Card.Title>
+          <Card.Subtitle
+            className='mb-2 text-muted'
+            style={{
+              color: 'white',
+              textAlign: 'center',
+            }}
+          >
+            {this.props.category}
+          </Card.Subtitle>
+        </Card.Body>
+        <Card.Footer
+          className='d-flex justify-content-around'
+          style={{ margin: '3%' }}
         >
-          Edit
-        </button>
+          <button
+            type='button'
+            className='btn btn-outline-info'
+            style={{ width: '40%' }}
+            onClick={() => {
+              window.location.href = `${ROUTES.EDIT_ITEM}?id=${this.props.id}`;
+            }}
+          >
+            Edit
+          </button>
 
-        <button
-          type='button'
-          className='btn btn-outline-danger'
-          style={{ width: '40%' }}
-          onClick={this.deleteItem}
-        >
-          Delete
-        </button>
-      </div>
+          <button
+            type='button'
+            className='btn btn-outline-danger'
+            style={{ width: '40%' }}
+            onClick={this.deleteItem}
+          >
+            Delete
+          </button>
+        </Card.Footer>
+      </Card>
     );
   }
 }
