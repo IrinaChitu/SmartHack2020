@@ -29,20 +29,16 @@ async function getShops() {
   let shops = [];
   const snapshot = await usersRef.get();
   snapshot.forEach((shop) => {
-    console.log(shop.data());
-
     const id = shop.id;
     const { shopName } = shop.data();
     shops.push({ id, shopName });
   });
-
-  console.log(shops);
   
   return shops;
 }
 
-app.get('/shops', (req, res) => {
-  let shops = getShops();
+app.get('/shops', async (req, res) => {
+  let shops = await getShops();
 
   console.log(shops);
 
