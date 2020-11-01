@@ -87,10 +87,14 @@ app.get('/items', async function(req, res) {
         let nx = x + dx[i];
         let ny = y + dy[j];
 
+        if (nx < 0 || ny < 0 || nx > 15 || ny > 25) {
+          continue;
+        }
+
         for (let shelve of shelves) {
-          if (nx !== shelve.xx && ny !== shelve.yy) {
+          if (nx != x && ny != y && nx !== shelve.xx && ny !== shelve.yy) {
             foundPosition = true;
-            items.push({id, name, nx, ny});
+            items.push({id, name, x: nx, y: ny});
             break;
           }
         }
