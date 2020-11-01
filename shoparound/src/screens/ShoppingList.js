@@ -91,24 +91,23 @@ class ShoppingItem extends Component {
   }
 }
 
-function getProductsInStock() {
+function getProductsInStock(shopId) {
   var products = [];
-  axios
-    .get('https://shoparound-db-api.herokuapp.com/items')
-    .then(function (response) {
-      console.log(response.data);
-      products = response.data;
-      // setShops(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-      //Perform action based on error
-    });
+  // axios
+  //   .get(`https://shoparound-db-api.herokuapp.com/items?id=${shopId}`)
+  //   .then(function (response) {
+  //     console.log(response.data);
+  //     products = response.data;
+  //     // setShops(response.data);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //     //Perform action based on error
+  //   });
+  // console.log(products); //.items);
 
-  // var products = ['lemon', 'apple', 'nuts', 'lime', 'fifa', 'firogaf'];
+  var products = ['lemon', 'apple', 'nuts', 'lime', 'fifa', 'firogaf'];
   products.sort();
-
-  // console.log(products);
 
   var i = 1;
   var lastChar = products[0][0];
@@ -125,7 +124,6 @@ function getProductsInStock() {
     i++;
   }
   allProducts.push(section);
-  // console.log(allProducts);
   return allProducts;
 }
 
@@ -168,7 +166,7 @@ function CreateShoppingListScreen({ route, navigation }) {
         }}
       />
       <SectionList
-        sections={getProductsInStock()}
+        sections={getProductsInStock(shopId)}
         renderItem={({ item }, idx) => (
           <ShoppingItem key={idx} item={item} shoppingList={shoppingList} />
         )}
