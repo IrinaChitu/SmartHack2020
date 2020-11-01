@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm install & node app.js",
+    "preinstall": "npm config set package-lock false",
+    "start": "node app.js",
+    "build": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
