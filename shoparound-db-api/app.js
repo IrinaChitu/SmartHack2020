@@ -82,8 +82,8 @@ app.get('/items', async function(req, res) {
     let y = parseInt(coords[1]);
 
     let foundPosition = false;
-    for (let i = 0; i < 4; ++i) {
-      for (let j = 0; j < 4; ++j) {
+    for (let i = 0; i < 4 && !foundPosition; ++i) {
+      for (let j = 0; j < 4 && !foundPosition; ++j) {
         let nx = x + dx[i];
         let ny = y + dy[j];
 
@@ -93,10 +93,6 @@ app.get('/items', async function(req, res) {
             items.push({id, name, nx, ny});
             break;
           }
-        }
-
-        if (foundPosition) {
-          break;
         }
       }
     }
