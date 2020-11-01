@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Container, Row } from 'react-bootstrap';
 import { withAuthorization } from '../../Session';
 import ShowItem from '../ShowItem';
 
@@ -41,14 +42,33 @@ class MyItems extends React.Component {
 
   render() {
     return (
-        <div>
-
-        {this.state.items.map(({ id, name, description, category }, idx) => {
-          return (
-            <ShowItem key={idx} id={id} name={name} description={description} category={category}/>
-          )
-        })}
-      </div>
+      <Container fluid>
+        <Row
+          xs='1'
+          sm='2'
+          md='3'
+          lg='4'
+          xl='5'
+          style={{
+            justifyContent: 'center',
+            margin: '4%',
+            // marginLeft: '5%',
+            // marginRight: '5%',
+          }}
+        >
+          {this.state.items.map(({ id, name, description, category }, idx) => {
+            return (
+              <ShowItem
+                key={idx}
+                id={id}
+                name={name}
+                description={description}
+                category={category}
+              />
+            );
+          })}
+        </Row>
+      </Container>
     );
   }
 }
