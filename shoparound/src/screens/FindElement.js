@@ -8,24 +8,24 @@ function FindProductScreen({ route, navigation }) {
 
   return (
     <View>
-      <Text>Daca exista in db atunci add</Text>
-      {!shoppingList.includes(search) ? (
+      {!shoppingList.includes(search) ? ( // here must search in database
         <Button
-          title='Add'
+          title='Add to shopping list'
           onPress={() => {
             shoppingList.push(search);
-            navigation.navigate('Create Shopping List', { shoppingList });
+            navigation.pop();
+            navigation.pop();
+            navigation.push('Create Shopping List', { shoppingList });
           }}
         />
       ) : (
         <Button
-          title='Go back to search'
+          title='Product Unavailable. Go back to shopping list'
           onPress={() => {
             navigation.pop();
           }}
         />
       )}
-      <Text>Altfel apare buton</Text>
     </View>
   );
 }

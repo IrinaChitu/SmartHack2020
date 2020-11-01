@@ -7,6 +7,7 @@ import ShopsListScreen from './src/screens/ShopsMenu.js';
 import StoreLocationScreen from './src/screens/StoreLocation.js';
 import CreateShoppingListScreen from './src/screens/ShoppingList.js';
 import FindProductScreen from './src/screens/FindElement.js';
+import ShoppingListScreen from './src/screens/FinalShoppingList.js';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ export default function App() {
           component={CreateShoppingListScreen}
         />
         <Stack.Screen name='Find Product' component={FindProductScreen} />
+        <Stack.Screen name='Shopping List' component={ShoppingListScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

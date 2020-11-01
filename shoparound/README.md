@@ -27,3 +27,9 @@ npm install @react-navigation/stack
 ### Other dependencies
 
 npm install react-native-elements --save
+
+npm add firebase
+
+npm install @react-native-firebase/firestore
+
+npm install @react-native-firebase/app
