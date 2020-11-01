@@ -32,7 +32,7 @@ async function getShops() {
     console.log(shop.data());
 
     const id = shop.id;
-    const { shopName } = item.data();
+    const { shopName } = shop.data();
     shops.push({ id, shopName });
   });
   
