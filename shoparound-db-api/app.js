@@ -53,9 +53,9 @@ app.get('/items', async function(req, res) {
                   .collection('shelves');
 
   let shelves = [];
-  const snapshot = await shelvesRef.get();
+  const snapshot1 = await shelvesRef.get();
 
-  snapshot.forEach((item) => {
+  snapshot1.forEach((item) => {
     const { x, y } = item.data()
     const xx = parseInt(x);
     const yy = parseInt(y);
@@ -69,12 +69,12 @@ app.get('/items', async function(req, res) {
                   .collection('items');
 
   let items = [];
-  const snapshot = await itemsRef.get();
+  const snapshot2 = await itemsRef.get();
 
   let dx = [-1, 0, 1, 0];
   let dy = [0, 1, 0, -1];
 
-  snapshot.forEach((item) => {
+  snapshot2.forEach((item) => {
     const id = item.id;
     const { name, id_shelf } = item.data();
     const coords = id_shelf.split('|');
