@@ -173,16 +173,12 @@ class ShopMap extends React.Component {
       .update({
         id_shelf: id_shelf,
       });
-
-    // document.getElementById(id_shelf).src = '../../images/shelf.png';
   };
 
-  unmarkItemOnShelf = (id, id_shelf) => {
-    // document.getElementById(id_shelf).src = '../../images/plusShelf.png';
-
+  unmarkItemOnShelf = (id) => {
     const authUser = this.props.firebase.auth.currentUser.uid;
 
-    const item = this.props.firebase.db
+    this.props.firebase.db
       .collection('users')
       .doc(authUser)
       .collection('items')
@@ -201,23 +197,9 @@ class ShopMap extends React.Component {
   markAddedItems = () => {
     document.getElementById('productList').style.visibility = 'hidden';
     this.getItems();
-
-    // for (let key in this.state.addedItems) {
-    //     if (this.state.addedItems.hasOwnProperty(key)) {
-    //         const item = this.props.firebase.db
-    //                         .collection('users')
-    //                         .doc(this.state.authUser)
-    //                         .collection('items')
-    //                         .doc(key)
-    //                         .update({
-    //                             id_shelf: this.state.addedItems[key]
-    //                         });
-    //     }
-    // }
   };
 
   async componentDidMount() {
-    // this.drawMap();
     await this.getItems();
     this.drawMap();
   }
@@ -274,8 +256,9 @@ class ShopMap extends React.Component {
                           <li key={idx}>
                             <input
                               type='checkbox'
+                              checked={true}
                               onClick={() => {
-                                this.unmarkItemOnShelf(id, id_shelf);
+                                this.unmarkItemOnShelf(id);
                               }}
                             />
                             {name}
@@ -283,8 +266,6 @@ class ShopMap extends React.Component {
                         );
                       }
                     })}
-                    {/* <li><input type="checkbox" /> product 1</li>
-                                <li><input type="checkbox" checked={true}/> product 2</li> */}
                   </ul>
                 </div>
               </div>
@@ -319,7 +300,6 @@ class ShopMap extends React.Component {
                   }
 
                   snapshot.forEach((item) => {
-                    // const id = item.id;
                     const authUser = this.props.firebase.auth.currentUser.uid;
 
                     const { id_shelf } = item.data();
