@@ -45,7 +45,7 @@ app.get('/shops', async (req, res) => {
   res.send(shops);
 })
 
-app.get('/items+shelves', async function(req, res) {
+app.get('/items', async function(req, res) {
   let shopId = req.query.id;
 
   const shelvesRef = firebaseDb.collection('users')
@@ -61,6 +61,8 @@ app.get('/items+shelves', async function(req, res) {
     const yy = parseInt(y);
     shelves.push({ xx, yy });
   });
+  
+  console.log(shelves);
 
   const itemsRef = firebaseDb.collection('users')
                   .doc(shopId)
@@ -99,6 +101,8 @@ app.get('/items+shelves', async function(req, res) {
       }
     }
   });
+
+  console.log(items);
 
   res.send({items: items, shelves: shelves});
 });
