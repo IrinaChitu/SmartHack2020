@@ -2,10 +2,10 @@
   "name": "shoparound-db-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "preinstall": "npm config set package-lock false",
-    "start": "node server.js",
+    "start": "node app.js",
     "build": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
