@@ -49,15 +49,21 @@ class ShopMap extends React.Component {
 
             let coords = ev.target.id.split('|');
 
-            const item = this.props.firebase.db
+            const authUser = this.props.firebase.auth.currentUser.uid;
+
+            try {
+                const item = this.props.firebase.db
                 .collection('users')
-                .doc(this.state.authUser)
+                .doc(authUser)
                 .collection('shelves')
                 .doc(ev.target.id)
                 .set({
                     x: coords[0],
                     y: coords[1]
                 });
+            } catch(err) {
+                console.log(err);
+            }
         } else {
             if(ev.target.src=='')
                 ev.target.src = '../../images/plusShelf.png';
@@ -81,6 +87,7 @@ class ShopMap extends React.Component {
             var gridCell = document.createElement('TD');
             var gridPlus = document.createElement('IMG');
             gridPlus.id = `${i}|${j}`;
+            gridPlus.src = '../../images/plusShelf.png';
 
             let flag = false;
             for (let item of this.state.items) {
@@ -140,12 +147,12 @@ class ShopMap extends React.Component {
             .doc(authUser)
             .collection('shelves');
 
+        let shelves = [];
         const shelvesSnapshot = await shelvesRef.get();
         if (shelvesSnapshot.empty) {
             return;
         }
 
-        let shelves = [];
         shelvesSnapshot.forEach((item) => {
             const id = item.id;
             shelves.push(id);
@@ -159,9 +166,11 @@ class ShopMap extends React.Component {
     }
 
     markItemOnShelf = (id, id_shelf) => {
+        const authUser = this.props.firebase.auth.currentUser.uid;
+
         const item = this.props.firebase.db
             .collection('users')
-            .doc(this.state.authUser)
+            .doc(authUser)
             .collection('items')
             .doc(id)
             .update({
@@ -174,9 +183,11 @@ class ShopMap extends React.Component {
     unmarkItemOnShelf = (id, id_shelf) => {
         // document.getElementById(id_shelf).src = '../../images/plusShelf.png';
 
+        const authUser = this.props.firebase.auth.currentUser.uid;
+
         const item = this.props.firebase.db
             .collection('users')
-            .doc(this.state.authUser)
+            .doc(authUser)
             .collection('items')
             .doc(id)
             .update({
@@ -234,7 +245,7 @@ class ShopMap extends React.Component {
                                 {items.map(({id, name, id_shelf}, idx) => {
                                     if (id_shelf === null) {
                                         return (
-                                            <li><input type="checkbox" onClick={() => {
+                                            <li key={idx}><input type="checkbox" onClick={() => {
                                                 this.markItemOnShelf(id, this.state.toggledIdShelf);
                                             }}/>{name}</li>
                                         )
@@ -252,7 +263,7 @@ class ShopMap extends React.Component {
                                 {items.map(({id, name, id_shelf }, idx) => {
                                     if (id_shelf !== null && id_shelf === this.state.toggledIdShelf) {
                                         return (
-                                            <li><input type="checkbox" onClick={() => {
+                                            <li key={idx}><input type="checkbox" onClick={() => {
                                                 this.unmarkItemOnShelf(id, id_shelf)
                                             }
                                             }/>{name}</li>
@@ -268,16 +279,18 @@ class ShopMap extends React.Component {
                         this.markAddedItems();
                     }}>Done</button>
                     <button className="w3-button w3-block w3-dark-grey" onClick={async () => {
+                        const authUser = this.props.firebase.auth.currentUser.uid;
+
                         const item = this.props.firebase.db
                             .collection('users')
-                            .doc(this.state.authUser)
+                            .doc(authUser)
                             .collection('shelves')
                             .doc(this.state.toggledIdShelf)
                             .delete();
 
                         var itemsRef = this.props.firebase.db
                             .collection('users')
-                            .doc(this.state.authUser)
+                            .doc(authUser)
                             .collection('items')
 
                         const snapshot = await itemsRef.get();
@@ -287,11 +300,13 @@ class ShopMap extends React.Component {
                     
                         snapshot.forEach((item) => {
                             // const id = item.id;
+                            const authUser = this.props.firebase.auth.currentUser.uid;
+
                             const { id_shelf } = item.data();
                             if (id_shelf === this.state.toggledIdShelf) {
                                 const res = this.props.firebase.db
                                             .collection('users')
-                                            .doc(this.state.authUser)
+                                            .doc(authUser)
                                             .collection('items')
                                             .doc(item.id)
                                             .update({
