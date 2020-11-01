@@ -22,7 +22,12 @@ function FastestRouteScreen({ route, navigation }) {
         {(imageUrl) => {
           var image = new Image();
           image.src = imageUrl;
-          return <Image style={{ width: 200, height: 200 }} source={image} />;
+          return (
+            <Image
+              style={{ width: 200, height: 200 }}
+              source={{ uri: `data:image/png;base64,${image}` }}
+            />
+          );
         }}
       </ImageZoom>
       {shoppingList.map((it) => {

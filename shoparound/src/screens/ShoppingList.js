@@ -1,4 +1,5 @@
 import React, { Component, useState } from 'react';
+import axios from 'axios';
 
 import {
   View,
@@ -91,7 +92,20 @@ class ShoppingItem extends Component {
 }
 
 function getProductsInStock() {
-  var products = ['lemon', 'apple', 'nuts', 'lime', 'fifa', 'firogaf'];
+  var products = [];
+  axios
+    .get('https://shoparound-db-api.herokuapp.com/items')
+    .then(function (response) {
+      console.log(response.data);
+      products = response.data;
+      // setShops(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+      //Perform action based on error
+    });
+
+  // var products = ['lemon', 'apple', 'nuts', 'lime', 'fifa', 'firogaf'];
   products.sort();
 
   // console.log(products);
@@ -117,6 +131,7 @@ function getProductsInStock() {
 
 function CreateShoppingListScreen({ route, navigation }) {
   var { shoppingList } = route.params;
+  var { shopId } = route.params;
   const [search, setSearch] = useState('');
 
   return (
