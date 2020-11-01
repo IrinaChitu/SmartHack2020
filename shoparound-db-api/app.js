@@ -45,26 +45,7 @@ app.get('/shops', async (req, res) => {
   res.send(shops);
 })
 
-app.get('/items', async function(req, res) {
-  let shopId = req.query.id;
-
-  const itemsRef = firebaseDb.collection('users')
-                  .doc(shopId)
-                  .collection('items');
-
-  let items = [];
-  const snapshot = await itemsRef.get();
-
-  snapshot.forEach((item) => {
-    const id = item.id;
-    const { name } = item.data();
-    items.push({ id, name });
-  });
-
-  res.send({items: items});
-});
-
-app.get('/shelves', async function(req, res) {
+app.get('/items+shelves', async function(req, res) {
   let shopId = req.query.id;
 
   const shelvesRef = firebaseDb.collection('users')
@@ -76,10 +57,68 @@ app.get('/shelves', async function(req, res) {
 
   snapshot.forEach((item) => {
     const { x, y } = item.data()
-    shelves.push({ x, y });
+    const xx = parseInt(x);
+    const yy = parseInt(y);
+    shelves.push({ xx, yy });
   });
 
-  res.send({shelves: shelves});
+  const itemsRef = firebaseDb.collection('users')
+                  .doc(shopId)
+                  .collection('items');
+
+  let items = [];
+  const snapshot = await itemsRef.get();
+
+  let dx = [-1, 0, 1, 0];
+  let dy = [0, 1, 0, -1];
+
+  snapshot.forEach((item) => {
+    const id = item.id;
+    const { name, id_shelf } = item.data();
+    const coords = id_shelf.split('|');
+    let x = parseInt(coords[0]);
+    let y = parseInt(coords[1]);
+
+    let foundPosition = false;
+    for (let i = 0; i < 4; ++i) {
+      for (let j = 0; j < 4; ++j) {
+        let nx = x + dx[i];
+        let ny = y + dy[j];
+
+        for (let shelve of shelves) {
+          if (nx !== shelve.xx && ny !== shelve.yy) {
+            foundPosition = true;
+            items.push({id, name, nx, ny});
+            break;
+          }
+        }
+
+        if (foundPosition) {
+          break;
+        }
+      }
+    }
+  });
+
+  res.send({items: items, shelves: shelves});
+});
+
+app.get('/shelves', async function(req, res) {
+  let shopId = req.query.id;
+
+  // const shelvesRef = firebaseDb.collection('users')
+  //                 .doc(shopId)
+  //                 .collection('shelves');
+
+  // let shelves = [];
+  // const snapshot = await shelvesRef.get();
+
+  // snapshot.forEach((item) => {
+  //   const { x, y } = item.data()
+  //   shelves.push({ x, y });
+  // });
+
+  // res.send({shelves: shelves});
 });
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));
