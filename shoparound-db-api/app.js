@@ -75,9 +75,7 @@ app.get('/shelves', async function(req, res) {
   const snapshot = await shelvesRef.get();
 
   snapshot.forEach((item) => {
-    const coords = item.id.split('|');
-    const x = coords[0];
-    const y = coords[1];
+    const { x, y } = item.data();
     shelves.push({ id, x, y });
   });
 
