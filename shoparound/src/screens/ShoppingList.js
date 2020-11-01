@@ -1,4 +1,5 @@
 import React, { Component, useState } from 'react';
+import axios from 'axios';
 
 import {
   View,
@@ -13,21 +14,21 @@ import firebase from '../config.js';
 
 // let itemsRef = db.ref('/items');
 
-function getAllProducts() {
-  // db.ref('/users').on('value', (querySnapShot) => {
-  //   let data = querySnapShot.val() ? querySnapShot.val() : {};
-  //   console.log(...data);
-  // });
-  // const ref = await firestore().collection('users');
-  // var db = firebase.firestore.collection('users');
-  // db.onSnapshot(getCollection);
-}
+// function getAllProducts() {
+// db.ref('/users').on('value', (querySnapShot) => {
+//   let data = querySnapShot.val() ? querySnapShot.val() : {};
+//   console.log(...data);
+// });
+// const ref = await firestore().collection('users');
+// var db = firebase.firestore.collection('users');
+// db.onSnapshot(getCollection);
+// }
 
-function getCollection(querySnapShot) {
-  querySnapShot.forEach((result) => {
-    console.log(result.data);
-  });
-}
+// function getCollection(querySnapShot) {
+//   querySnapShot.forEach((result) => {
+//     console.log(result.data);
+//   });
+// }
 
 const styles = StyleSheet.create({
   container: {
@@ -90,23 +91,46 @@ class ShoppingItem extends Component {
   }
 }
 
-function getProductsInStock() {
-  // var products = ['lemon', 'apple', 'nuts'];
-  // products.sort();
-  // for (var i = 0; i < products.length; i++) {
-  //   // console.log(product);
-  //   var section = { title: products[i], data: [products[i]] };
-  //   section.data.push(products[i]);
-  // }
+function getProductsInStock(shopId) {
+  var products = [];
+  // axios
+  //   .get(`https://shoparound-db-api.herokuapp.com/items?id=${shopId}`)
+  //   .then(function (response) {
+  //     console.log(response.data);
+  //     products = response.data;
+  //     // setShops(response.data);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //     //Perform action based on error
+  //   });
+  // console.log(products); //.items);
 
-  var allProducts = getAllProducts();
-  console.log(allProducts);
+  var products = ['lemon', 'apple', 'nuts', 'lime', 'fifa', 'firogaf'];
+  products.sort();
+
+  var i = 1;
+  var lastChar = products[0][0];
+  var allProducts = [];
+  var section = { title: products[0][0], data: [products[0]] };
+  while (i < products.length) {
+    if (products[i][0] === lastChar) {
+      section.data.push(products[i]);
+    } else {
+      lastChar = products[i][0];
+      allProducts.push(section);
+      section = { title: products[i][0], data: [products[i]] };
+    }
+    i++;
+  }
+  allProducts.push(section);
+  return allProducts;
 }
 
 function CreateShoppingListScreen({ route, navigation }) {
   var { shoppingList } = route.params;
+  var { shopId } = route.params;
   const [search, setSearch] = useState('');
-  var productsInStock = getProductsInStock();
 
   return (
     <View>
@@ -123,18 +147,18 @@ function CreateShoppingListScreen({ route, navigation }) {
           navigation.navigate('Find Product', { search, shoppingList });
         }}
       />
-      <Button
+      {/* <Button
         title='Show Search'
         onPress={() => {
           console.log(search);
         }}
-      />
-      <Button
+      /> */}
+      {/* <Button
         title='Show Shopping List'
         onPress={() => {
           console.log(shoppingList);
         }}
-      />
+      /> */}
       <Button
         title='Finish shopping list'
         onPress={() => {
@@ -142,7 +166,7 @@ function CreateShoppingListScreen({ route, navigation }) {
         }}
       />
       <SectionList
-        sections={dataList}
+        sections={getProductsInStock(shopId)}
         renderItem={({ item }, idx) => (
           <ShoppingItem key={idx} item={item} shoppingList={shoppingList} />
         )}
@@ -156,11 +180,3 @@ function CreateShoppingListScreen({ route, navigation }) {
 }
 
 export default CreateShoppingListScreen;
-
-var dataList = [
-  { title: 'D', data: ['Devin', 'Dan', 'Dominic'] },
-  {
-    title: 'J',
-    data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie'],
-  },
-];

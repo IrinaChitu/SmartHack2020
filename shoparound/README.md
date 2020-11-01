@@ -33,3 +33,5 @@ npm add firebase
 npm install @react-native-firebase/firestore
 
 npm install @react-native-firebase/app
+
+npm i react-native-image-pan-zoom --save
