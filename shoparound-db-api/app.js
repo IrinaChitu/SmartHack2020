@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded());
 
-const app = require('firebase/app');
+const firebaseApp = require('firebase/app');
 require('firebase/auth');
 require('firebase/firestore');
 
@@ -20,11 +20,11 @@ const config = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
 
-app.initializeApp(config);
-db = app.firestore();
+firebaseApp.initializeApp(config);
+const firebaseDb = firebaseApp.firestore();
 
 app.get('/items', function(req, res) {
-    const itemsRef = db.collection('users')
+    const itemsRef = firebaseDb.collection('users')
                     .doc(authUser)
                     .collection('items');
 
