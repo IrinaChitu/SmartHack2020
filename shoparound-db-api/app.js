@@ -35,6 +35,8 @@ async function getShops() {
     const { shopName } = shop.data();
     shops.push({ id, shopName });
   });
+
+  console.log(shops);
   
   return shops;
 }
