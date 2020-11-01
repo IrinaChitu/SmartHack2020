@@ -100,4 +100,4 @@ def solve_hamiltonian_path(start, finish, interest, matrix):
     index_path = hamilton_path(distance_matrix)
     total_cost, path = get_path(nodes, index_path, matrix)
 
-    return total_cost, path
+    return index_path, total_cost, path
