@@ -28,19 +28,22 @@ app.get('/items', async function(req, res) {
                     .doc(authUser)
                     .collection('items');
 
-    const snapshot = await itemsRef.get();
-    if (snapshot.empty) {
-      res.send({code: 400});
-    }
+    console.log(itemsRef);
+    itemsRef.get().then((snapshot) => {
+      let items = [];
 
-    let items = [];
-    snapshot.forEach((item) => {
-      const id = item.id;
-      const { name, description, category } = item.data();
-      items.push({ id, name, description, category });
+      snapshot.forEach((item) => {
+        console.log(item.data());
+
+        const id = item.id;
+        const { name, description, category } = item.data();
+        items.push({ id, name, description, category });
+      });
+  
+      res.send({items: items});
+    }).catch((err) => {
+      res.send(err);
     });
-
-    res.send({items: items});
 });
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));
