@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script src="CreateShopMap.js"></script>
+    <link rel="stylesheet" href="CreateShopMap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+<!-- <div class="grid" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div> -->
+
+<!-- <div style="width:200px; height:100px; background-image: url('../../public/images/plus.png')"></div> -->
+<!-- <img id="drag1" src="../../public/logo192.png" draggable="true" ondragstart="drag(event)" width="336" height="69"> -->
+<div id="gridSpace"></div>
+<div id="productList" >
+<div class="w3-container" >
+  
+    <div class="w3-card-4" style="width:100%">
+      <header class="w3-container w3-light-grey">
+        <h4>Add a product to current shelf</h4>
+      </header>
+      <div class="w3-container">
+        <div id="checkboxes">
+            <ul>
+              <li><input type="checkbox"> lista produse disponibile pe care le vom lua din DB (onclick => add to DB)</li>
+              <li><input type="checkbox"> lista produse disponibile pe care le vom lua din DB (onclick => add to DB)</li>
+              <li><input type="checkbox"> lista produse disponibile pe care le vom lua din DB (onclick => add to DB)</li>
+       
+            </ul>
+          </div>
+      </div>
+      <header class="w3-container w3-light-grey">
+        <h4>Existing products</h4>
+      </header>
+      <div class="w3-container">
+        <div id="checkboxes">
+            <ul>
+              <li><input type="checkbox" checked="true"> product 1</li>
+              <li><input type="checkbox" checked="true"> product 2</li>
+       
+            </ul>
+          </div>
+      </div>
+      <button class="w3-button w3-block w3-dark-grey" onclick="document.getElementById('productList').style.visibility = 'hidden'">Done</button>
+    </div>
+  </div>
+  </div>
+</body>
+</html>
