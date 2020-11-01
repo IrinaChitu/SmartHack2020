@@ -6,6 +6,7 @@ import ImageZoom from 'react-native-image-pan-zoom';
 
 function FastestRouteScreen({ route, navigation }) {
   var { shoppingList } = route.params;
+  var { imageUrl } = route.params;
   return (
     <View>
       {/* <Image
@@ -18,10 +19,11 @@ function FastestRouteScreen({ route, navigation }) {
         imageWidth={200}
         imageHeight={200}
       >
-        <Image
-          style={{ width: 200, height: 200 }}
-          source={require('../demo-road.jpg')}
-        />
+        {(imageUrl) => {
+          var image = new Image();
+          image.src = imageUrl;
+          return <Image style={{ width: 200, height: 200 }} source={image} />;
+        }}
       </ImageZoom>
       {shoppingList.map((it) => {
         return <CheckBox title={it} checked={true} />;

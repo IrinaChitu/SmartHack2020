@@ -13,6 +13,8 @@
     "@react-native-firebase/firestore": "^7.9.1",
     "@react-navigation/native": "^5.8.2",
     "@react-navigation/stack": "^5.11.1",
+    "axios": "^0.21.0",
+    "buffer": "^5.7.0",
     "expo": "~39.0.2",
     "expo-status-bar": "~1.0.2",
     "firebase": "^8.0.0",
@@ -27,6 +29,7 @@
     "react-native-screens": "~2.10.1",
     "react-native-web": "~0.13.12"
   },
+  "proxy": "http://shoparound-smart.herokuapp.com/",
   "devDependencies": {
     "@babel/core": "~7.9.0"
   },
