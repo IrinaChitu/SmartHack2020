@@ -87,7 +87,7 @@ app.get('/items', async function(req, res) {
         let nx = x + dx[i];
         let ny = y + dy[j];
 
-        if (nx < 0 || ny < 0 || nx > 15 || ny > 25) {
+        if (nx < 0 || ny < 0 || nx >= 15 || ny >= 25) {
           continue;
         }
 
@@ -107,8 +107,8 @@ app.get('/items', async function(req, res) {
   res.send({items: items, shelves: shelves});
 });
 
-app.get('/shelves', async function(req, res) {
-  let shopId = req.query.id;
+// app.get('/shelves', async function(req, res) {
+  // let shopId = req.query.id;
 
   // const shelvesRef = firebaseDb.collection('users')
   //                 .doc(shopId)
@@ -123,6 +123,6 @@ app.get('/shelves', async function(req, res) {
   // });
 
   // res.send({shelves: shelves});
-});
+// });
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));
