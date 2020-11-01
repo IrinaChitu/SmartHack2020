@@ -23,7 +23,7 @@ const config = {
 firebaseApp.initializeApp(config);
 const firebaseDb = firebaseApp.firestore();
 
-app.get('/items', function(req, res) {
+app.get('/items', async function(req, res) {
     const itemsRef = firebaseDb.collection('users')
                     .doc(authUser)
                     .collection('items');
