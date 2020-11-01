@@ -36,7 +36,7 @@ def get_image(rows_num, cols_num, matrix, start_pos, finish_pos, interest, path,
         draw.line((ya, xa, yb, xb), fill=(255, 0, 0), width = patch_size // 8)
 
     font_size = 30
-    font = ImageFont.truetype("Arial.ttf", size=font_size)
+    font = ImageFont.truetype("../Arial.ttf", size=font_size)
     for i in range(1, len(index_path) - 1):
         x, y = interest[index_path[i] - 1]
         cx, cy = center(x, y, patch_size)
