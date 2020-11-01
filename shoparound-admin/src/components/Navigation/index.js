@@ -39,6 +39,7 @@ const NavigationAuth = () => (
             My items
           </Nav.Link>
           <Nav.Link href={ROUTES.NEW_ITEM}>Add new item</Nav.Link>
+          <Nav.Link href={ROUTES.SHOP_MAP}>Shop map</Nav.Link>
           <Nav.Link title='account' href={ROUTES.ACCOUNT} > Account </Nav.Link>
           <Nav.Link title='signout' href='#'>
             <SignOutButton />
