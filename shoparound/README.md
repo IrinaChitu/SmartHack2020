@@ -1,3 +1,5 @@
+2:02:30: https://www.youtube.com/watch?v=5pcVbYT8vxw&t=4622s
+
 # ShopAround
 
 ## Using Expo and React Native
